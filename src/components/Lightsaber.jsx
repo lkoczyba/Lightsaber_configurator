@@ -1,14 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Canvas, useLoader} from "@react-three/fiber";
 import {Environment, OrbitControls} from "@react-three/drei";
-
+import {Button} from "@/components/ui/button"
 import {LightsaberPart} from "./LightsaberPart";
 import {LightsaberContext} from "../LightsaberContext.jsx";
 import {addDoc, collection} from "firebase/firestore";
 import {db} from "../config/firebase";
 import Configurator from "./Configurator";
 import {useParams} from "react-router-dom";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faFile, faFloppyDisk, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 
 const Lightsaber = ({lightsaberObject}) => {
 
@@ -49,7 +50,7 @@ const Lightsaber = ({lightsaberObject}) => {
     }, []);
 
     const handleSave = async () => {
-        const name = prompt("podej nazwę");
+        const name = prompt("Lightsaber name");
         setLightsaberConfig({...lightsaberConfig, name: name});
         const collectionRef = collection(db, "lightsaberConfigurator");
         await addDoc(collectionRef, {...lightsaberConfig, name: name});
@@ -78,11 +79,11 @@ const Lightsaber = ({lightsaberObject}) => {
 
     return (
         <>
-            <div className={`lightsaber ${editMode ? "lightsaber--collapsed": ""}`}>
-                <div className="lightsaber__button-container">
-                    <button className="lightsaber__button" onClick={handleSave}>Save</button>
-                    <button className="lightsaber__button" onClick={handleEdit}>Edit</button>
-                    <button className="lightsaber__button" onClick={handleNew}>New</button>
+            <div className={editMode?"basis-3/4 shrink grow overflow-hidden h-[calc(100vh-50px)]":"basis-full overflow-hidden shrink grow h-[calc(100vh-50px)]" }>
+                <div className="absolute z-10">
+                    <Button className="m-1" variant="secondary" size="icon" onClick={handleSave}><FontAwesomeIcon icon={faFloppyDisk} /></Button>
+                    <Button className="m-1" variant="secondary" size="icon" onClick={handleEdit}><FontAwesomeIcon icon={faPenToSquare} /></Button>
+                    <Button className="m-1" variant="secondary" size="icon" onClick={handleNew}><FontAwesomeIcon icon={faFile} /></Button>
                 </div>
                 <Canvas camera={{position: [0, 0, 3], near: 0.025}}>
                     <LightsaberPart lightsaberConfig={lightsaberConfig} part="emitter"/>
@@ -106,7 +107,7 @@ const Lightsaber = ({lightsaberObject}) => {
                     {/*</mesh>*/}
 
 
-                    <color attach="background" args={["#111111"]}/>
+                    <color attach="background" args={["#020817"]}/>
                     {/*<fog attach="fog" args={["#111111", 10, 20]}/>*/}
                     <Environment preset={"studio"}/>
                     <OrbitControls/>

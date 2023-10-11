@@ -20,7 +20,7 @@ const Gallery = () => {
     console.log(lightsaberConfigArray);
 
     return (
-        <div className="gallery">
+        <div className="flex flex-wrap">
 
             {
                 lightsaberConfigArray?.map((lightsaber)=><GalleryDisplay lightsaberConfig={lightsaber} key={lightsaber.id}/>)

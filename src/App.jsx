@@ -17,7 +17,7 @@ import {
 import Gallery from "./components/Gallery";
 import Home from "./components/Home";
 import Navigation from "./components/Navigation";
-import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp.jsx";
 import {LightsaberProvider} from "./LightsaberContext.jsx";
 import CreateAccount from "./components/CreateAccount";
 
@@ -118,12 +118,12 @@ export default function App() {
                 <Routes>
                     <Route path='/' element={<Home/>}/>
                     <Route path='createLightsaber'>
-                        <Route path=':edit' element={<div className="app">
+                        <Route path=':edit' element={<div className="flex">
                             <Lightsaber lightsaberObject={lightsaberObject}/>
                         </div>}/>
                     </Route>
                     <Route path='gallery' element={<Gallery lightsaberObject={lightsaberObject}/>}/>
-                    <Route path='login' element={<SignIn/>}/>
+                    <Route path='login' element={<SignUp/>}/>
                     <Route path='createAccount' element={<CreateAccount/>}/>
 
                 </Routes>
