@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Canvas, useLoader} from "@react-three/fiber";
-import {Environment, OrbitControls} from "@react-three/drei";
+import {Canvas, extend, useLoader} from "@react-three/fiber";
+import {Environment, OrbitControls, SpotLight} from "@react-three/drei";
 import {Button} from "@/components/ui/button"
 import {LightsaberPart} from "./LightsaberPart";
 import {LightsaberContext} from "../LightsaberContext.jsx";
@@ -9,15 +9,27 @@ import {db} from "../config/firebase";
 import Configurator from "./Configurator";
 import {useParams} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faFile, faFloppyDisk, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import {faFile, faFloppyDisk, faPenToSquare, faLightbulb} from '@fortawesome/free-solid-svg-icons'
+import Blade from "@/components/Blade.jsx";
+import { Effects } from '@react-three/drei'
+import { UnrealBloomPass } from 'three-stdlib'
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
+import * as THREE from 'three'
+import {Bloom, EffectComposer, SSAO} from '@react-three/postprocessing'
+import { BlurPass, Resizer, KernelSize, Resolution } from 'postprocessing'
+extend({ UnrealBloomPass, OutputPass })
 
 const Lightsaber = ({lightsaberObject}) => {
+
+    const onSound = new Audio("../../sounds/Lightsaber_On.wav");
+    const offSound = new Audio("../../sounds/Lightsaber_Off.wav");
 
     const { edit } = useParams();
 
     const {lightsaberConfig,updateLightsaberConfig,setLightsaberConfig, resetLightsaberConfig} = useContext(LightsaberContext);
 
     const [editMode, setEditMode] = useState(true);
+    const [beamOn, setBeamOn] = useState(false);
 
     const calcLightsaberLength = () => {
         const emitterLength = lightsaberConfig.emitter.length * lightsaberObject.scene.getObjectByName(lightsaberConfig.emitter.name).geometry.boundingBox.max.x;
@@ -65,6 +77,15 @@ const Lightsaber = ({lightsaberObject}) => {
         calcLightsaberLength();
     }
 
+    const handleBeamOn=()=>{
+        if(beamOn){
+            offSound.play();
+        }else{
+            onSound.play();
+        }
+        setBeamOn(prevState => !prevState);
+    }
+
     useEffect(() => {
         if(edit==="EditOff"){
             setEditMode(false);
@@ -84,12 +105,21 @@ const Lightsaber = ({lightsaberObject}) => {
                     <Button className="m-1" variant="secondary" size="icon" onClick={handleSave}><FontAwesomeIcon icon={faFloppyDisk} /></Button>
                     <Button className="m-1" variant="secondary" size="icon" onClick={handleEdit}><FontAwesomeIcon icon={faPenToSquare} /></Button>
                     <Button className="m-1" variant="secondary" size="icon" onClick={handleNew}><FontAwesomeIcon icon={faFile} /></Button>
+                    <Button className="m-1 ml-10" variant="secondary" size="icon" onClick={handleBeamOn}><FontAwesomeIcon className={beamOn?"text-card":""} icon={faLightbulb} /></Button>
                 </div>
-                <Canvas camera={{position: [0, 0, 3], near: 0.025}}>
+
+                <Canvas flat camera={{position: [0, 0, 3], near: 0.025}}>
+
+                    <Effects disableGamma>
+                        {/* threshhold has to be 1, so nothing at all gets bloom by default */}
+                        <unrealBloomPass threshold={10000} strength={0.005} radius={0.2} />
+                        <outputPass args={[THREE.ACESFilmicToneMapping]} />
+                    </Effects>
                     <LightsaberPart lightsaberConfig={lightsaberConfig} part="emitter"/>
                     <LightsaberPart lightsaberConfig={lightsaberConfig} part="switch"/>
                     <LightsaberPart lightsaberConfig={lightsaberConfig} part="grip"/>
                     <LightsaberPart lightsaberConfig={lightsaberConfig} part="pommel"/>
+                    <Blade beamOn={beamOn}/>
                     {/*<mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-0.3}>*/}
                     {/*    <planeGeometry args={[170, 170]}/>*/}
                     {/*    <MeshReflectorMaterial*/}
@@ -110,6 +140,8 @@ const Lightsaber = ({lightsaberObject}) => {
                     <color attach="background" args={["#020817"]}/>
                     {/*<fog attach="fog" args={["#111111", 10, 20]}/>*/}
                     <Environment preset={"studio"}/>
+                    {/*<ambientLight />*/}
+                    {/*<pointLight position={[0,10,10]} intensity={2}></pointLight>*/}
                     <OrbitControls/>
                     {/*<Stats/>*/}
                 </Canvas>
