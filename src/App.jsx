@@ -28,14 +28,9 @@ export default function App() {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setCurrentUser(user.email)
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/auth.user
-                const uid = user.uid;
-                // ...
+                setCurrentUser(user)
+                console.log(user)
             } else {
-                // User is signed out
-                // ...
                 setCurrentUser("")
             }
         })
@@ -119,10 +114,10 @@ export default function App() {
                     <Route path='/' element={<Home/>}/>
                     <Route path='createLightsaber'>
                         <Route path=':edit' element={<div className="flex">
-                            <Lightsaber lightsaberObject={lightsaberObject}/>
+                            <Lightsaber lightsaberObject={lightsaberObject} currentUser={currentUser}/>
                         </div>}/>
                     </Route>
-                    <Route path='gallery' element={<Gallery lightsaberObject={lightsaberObject}/>}/>
+                    <Route path='gallery' element={<Gallery lightsaberObject={lightsaberObject} currentUser={currentUser}/>}/>
                     <Route path='login' element={<SignUp/>}/>
                     <Route path='createAccount' element={<CreateAccount/>}/>
 

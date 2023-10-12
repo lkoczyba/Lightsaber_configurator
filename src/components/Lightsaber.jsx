@@ -19,7 +19,7 @@ import {Bloom, EffectComposer, SSAO} from '@react-three/postprocessing'
 import { BlurPass, Resizer, KernelSize, Resolution } from 'postprocessing'
 extend({ UnrealBloomPass, OutputPass })
 
-const Lightsaber = ({lightsaberObject}) => {
+const Lightsaber = ({lightsaberObject, currentUser}) => {
 
     const onSound = new Audio("../../sounds/Lightsaber_On.wav");
     const offSound = new Audio("../../sounds/Lightsaber_Off.wav");
@@ -65,7 +65,7 @@ const Lightsaber = ({lightsaberObject}) => {
         const name = prompt("Lightsaber name");
         setLightsaberConfig({...lightsaberConfig, name: name});
         const collectionRef = collection(db, "lightsaberConfigurator");
-        await addDoc(collectionRef, {...lightsaberConfig, name: name});
+        await addDoc(collectionRef, {...lightsaberConfig, name: name, userId: currentUser.uid});
     }
 
     const handleEdit = ()=>{

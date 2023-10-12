@@ -26,7 +26,7 @@ const Navigation = ({currentUser}) => {
                     </Button>
 
                 </ul>
-                <p className="px-4">{currentUser}</p>
+                <p className="px-4">{currentUser.email}</p>
             </nav>
             <Separator/>
         </>

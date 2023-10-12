@@ -4,13 +4,13 @@ import GalleryDisplay from "./GalleryDisplay";
 import {collection, onSnapshot} from "firebase/firestore";
 import {db} from "../config/firebase";
 
-const Gallery = () => {
+const Gallery = ({currentUser}) => {
 
     const {setLightsaberConfigArray}= useContext(LightsaberContext);
 
     useEffect(() =>
             onSnapshot(collection(db, "lightsaberConfigurator"), (snapshot)=> {
-                    setLightsaberConfigArray(snapshot.docs.map(doc => ({...doc.data(), id:doc.id})));
+                    setLightsaberConfigArray(snapshot.docs.filter(doc=>doc.data().userId===currentUser.uid).map(doc => ({...doc.data(), id:doc.id})));
                 }
             )
         , []);
