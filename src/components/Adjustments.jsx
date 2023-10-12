@@ -12,9 +12,9 @@ const handleOnChange = (e, property)=> {
 
     return (
         <div className="my-2">
-            <div className="flex">
+            <div className="flex items-center">
                 <p className="basis-1/3">Color:</p>
-                <input className="appearance-none border-none outline-none bg-transparent rounded-sm" type="color" value={lightsaberConfig[part].color} onChange={e=>handleOnChange(e, "color")}/>
+                <input className="appearance-none border-none outline-none bg-transparent rounded-sm w-[30px] h-[30px]" type="color" value={lightsaberConfig[part].color} onChange={e=>handleOnChange(e, "color")}/>
             </div>
             <div className="flex">
                 <p className="basis-1/3">Metalness:</p>

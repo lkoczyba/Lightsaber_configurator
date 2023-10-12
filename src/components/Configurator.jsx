@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator"
 
 import Adjustments from "./Adjustments";
 import {LightsaberContext} from "../LightsaberContext.jsx";
+import LightsaberColor from "@/components/LightsaberColor.jsx";
 
 
 const Configurator = ({lightsaberObject, active}) => {
@@ -104,6 +105,15 @@ const Configurator = ({lightsaberObject, active}) => {
                         </div>
                         <Separator/>
                         <Adjustments part="pommel"/>
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
+            <Accordion type="single" collapsible className="">
+                <AccordionItem value="item-1">
+                    <AccordionTrigger>Beam color</AccordionTrigger>
+                    <AccordionContent className="">
+                        <Separator/>
+                        <LightsaberColor/>
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>

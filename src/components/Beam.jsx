@@ -7,7 +7,7 @@ import {MathUtils} from "three";
 
 
 
-const Blade = ({beamOn}) => {
+const Beam = ({beamOn, lightsaberConfig}) => {
     const {nodes} = useGLTF('./models/Lightsaber.glb');
 
     const ref=useRef()
@@ -27,8 +27,8 @@ const Blade = ({beamOn}) => {
 
 
                     <meshStandardMaterial
-                        color="#ff0000"
-                        emissive="#ff0000" emissiveIntensity={35000}
+                        color={lightsaberConfig.beam.color}
+                        emissive={lightsaberConfig.beam.color} emissiveIntensity={35000}
                         toneMapped={false}
                     />
                 </mesh>
@@ -47,4 +47,4 @@ const Blade = ({beamOn}) => {
 };
 useGLTF.preload('./models/Lightsaber.glb');
 
-export default Blade;
+export default Beam;

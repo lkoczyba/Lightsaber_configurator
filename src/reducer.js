@@ -59,8 +59,13 @@ export const initialState = {
             position: 0,
             name: 'Pommel_1'
         },
+        beam: {
+            color: "#ff0000"
+        },
         id: "",
+        userId: "",
         name: ""
+
 
     },
     lightsaberConfigArray: [],

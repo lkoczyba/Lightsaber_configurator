@@ -10,7 +10,7 @@ import Configurator from "./Configurator";
 import {useParams} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFile, faFloppyDisk, faPenToSquare, faLightbulb} from '@fortawesome/free-solid-svg-icons'
-import Blade from "@/components/Blade.jsx";
+import Beam from "@/components/Beam.jsx";
 import { Effects } from '@react-three/drei'
 import { UnrealBloomPass } from 'three-stdlib'
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
@@ -119,7 +119,7 @@ const Lightsaber = ({lightsaberObject}) => {
                     <LightsaberPart lightsaberConfig={lightsaberConfig} part="switch"/>
                     <LightsaberPart lightsaberConfig={lightsaberConfig} part="grip"/>
                     <LightsaberPart lightsaberConfig={lightsaberConfig} part="pommel"/>
-                    <Blade beamOn={beamOn}/>
+                    <Beam lightsaberConfig={lightsaberConfig} beamOn={beamOn}/>
                     {/*<mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-0.3}>*/}
                     {/*    <planeGeometry args={[170, 170]}/>*/}
                     {/*    <MeshReflectorMaterial*/}
