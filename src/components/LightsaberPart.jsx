@@ -4,7 +4,7 @@ import React from "react";
 
 
 export function LightsaberPart({part, lightsaberConfig}) {
-    const {nodes, materials} = useGLTF('./models/Lightsaber.glb');
+    const {nodes} = useGLTF('./models/Lightsaber.glb');
 
     return (
         <group dispose={null}>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {createUserWithEmailAndPassword,signInWithPopup, signOut} from "firebase/auth"
-import {auth, googleAuthProvider} from "../config/firebase"
+import {createUserWithEmailAndPassword} from "firebase/auth"
+import {auth} from "../config/firebase"
 import {
     Card,
     CardContent,
@@ -19,7 +19,6 @@ const CreateAccount = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-
     const createAccount = async (e) => {
         e.preventDefault();
 
@@ -28,29 +27,13 @@ const CreateAccount = () => {
                 await createUserWithEmailAndPassword(auth, email, password);
             } catch (err) {
                 console.error(err);
-                alert("nieprawidłowy email lub hasło")
+                alert("wrong e-mail or password")
             }
         }else{
             alert("passwords don't match")
         }
 
 
-    }
-
-    const signInWithGoogle = async () => {
-        try {
-            await signInWithPopup(auth, googleAuthProvider);
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    const logout = async () => {
-        try {
-            await signOut(auth);
-        } catch (err) {
-            console.error(err);
-        }
     }
 
     return (

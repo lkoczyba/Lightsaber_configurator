@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useRef} from 'react';
-import {Canvas, dispose} from "@react-three/fiber";
+import React, {useContext} from 'react';
+import {Canvas} from "@react-three/fiber";
 import {Center, Clone, Environment} from "@react-three/drei";
 import {LightsaberContext} from "../LightsaberContext.jsx";
 import {
@@ -24,8 +24,6 @@ const PartDisplay = ({object, part}) => {
 
         updateLightsaberConfig(part, "name", object.name);
     }
-
-
 
     return (
         <Card onClick={handleClick} className={ lightsaberConfig[part].name === object.name ? "m-1 overflow-hidden  border-primary border-2 w-[100px] h-[50px]" : "m-1 overflow-hidden border-2  w-[100px] h-[50px]"}>

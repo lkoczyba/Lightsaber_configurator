@@ -46,7 +46,6 @@ const Configurator = ({lightsaberObject, active}) => {
                                 lightsaberConfig={lightsaberConfig}
                                 key={index}
                                 object={item} part="emitter"/>)
-
                         }
                         </div>
                         <Separator/>
@@ -64,7 +63,6 @@ const Configurator = ({lightsaberObject, active}) => {
                                     lightsaberConfig={lightsaberConfig}
                                     key={index}
                                     object={item} part="switch"/>)
-
                             }
                         </div>
                         <Separator/>
@@ -82,7 +80,6 @@ const Configurator = ({lightsaberObject, active}) => {
                                     lightsaberConfig={lightsaberConfig}
                                     key={index}
                                     object={item} part="grip"/>)
-
                             }
                         </div>
                         <Separator/>
@@ -100,7 +97,6 @@ const Configurator = ({lightsaberObject, active}) => {
                                     lightsaberConfig={lightsaberConfig}
                                     key={index}
                                     object={item} part="pommel"/>)
-
                             }
                         </div>
                         <Separator/>
@@ -117,36 +113,6 @@ const Configurator = ({lightsaberObject, active}) => {
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
-            {/*<h2>Switch</h2>*/}
-            {/*<div className="configurator__container">*/}
-            {/*    {*/}
-            {/*        getMeshByUserDataValue(lightsaberObject.scene, "type", "switch").map((item, index) => <PartDisplay*/}
-            {/*            lightsaberConfig={lightsaberConfig}*/}
-            {/*            key={index}*/}
-            {/*            object={item} part="switch"/>)*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*<Adjustments part="switch"/>*/}
-            {/*<h2>Grip</h2>*/}
-            {/*<div className="configurator__container">*/}
-            {/*    {*/}
-            {/*        getMeshByUserDataValue(lightsaberObject.scene, "type", "grip").map((item, index) => <PartDisplay*/}
-            {/*            lightsaberConfig={lightsaberConfig}*/}
-            {/*            key={index}*/}
-            {/*            object={item} part="grip"/>)*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*<Adjustments part="grip"/>*/}
-            {/*<h2>Pommel</h2>*/}
-            {/*<div className="configurator__container">*/}
-            {/*    {*/}
-            {/*        getMeshByUserDataValue(lightsaberObject.scene, "type", "pommel").map((item, index) => <PartDisplay*/}
-            {/*            lightsaberConfig={lightsaberConfig}*/}
-            {/*            key={index}*/}
-            {/*            object={item} part="pommel"/>)*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*<Adjustments part="pommel"/>*/}
         </div>
     );
 };
